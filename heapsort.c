@@ -5,6 +5,8 @@
 
 int a[max];
 
+void del(int);
+
 void swap(int *x, int *y)
 {
     int temp = *x; 
@@ -36,8 +38,37 @@ void heapsort(int a[],int n)
     }
     for(int i=n;i>=1;i--)
     {
-        swap(&a[i],&a[1]);
-        maxhepify(a,i-1,1);
+        // swap(&a[i],&a[1]);
+        // maxhepify(a,i-1,1);
+
+        // int j=1;
+        // swap(&a[1],&a[i]);
+
+        del(i);
+
+
+    }
+
+}
+
+void del(int n)
+{
+    int i=1,temp;
+    swap(&a[1],&a[n]);
+    n--;
+    while(2*i<=n)
+    {
+        int j=2*i;
+        if(j<n && a[j]<a[j+1])
+          j++;
+        if(a[i]>a[j])
+        break;
+         temp=a[i];
+         a[i]=a[j];
+         a[j]=temp;
+
+         i=j;
+
     }
 }
 
@@ -50,6 +81,7 @@ int main()
     scanf("%d",&a[i]);
 
     heapsort(a,n);
+    
     for(int i=1;i<=n;i++)
     printf("%d->",a[i]);
 
